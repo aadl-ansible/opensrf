@@ -2,3 +2,8 @@
 - name: ldconfig
   command: ldconfig
   become: true
+
+- name: Restart ejabberd
+  service:
+    state: restarted
+    name: ejabberd

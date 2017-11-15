@@ -4,3 +4,12 @@
     content: "{{ evergreen_install_prefix }}/lib"
     dest: /etc/ld.so.conf.d/opensrf.conf
   notify: ldconfig
+
+- name: Enable SMP in ejabberd
+  lineinfile: 
+    state: present 
+    backrefs: yes 
+    dest: /etc/default/ejabberd 
+    regexp: '^#SMP=.*' 
+    line: 'SMP=auto'
+  notify: Restart ejabberd
