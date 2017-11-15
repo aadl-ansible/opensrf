@@ -1,0 +1,24 @@
+---
+# Configure and compile as the OpenSRF User
+- name: Configure the OpenSRF source
+  command: "./configure {{ opensrf_configure_options }}"
+  args:
+    chdir: "{{ opensrf_src_directory }}"
+    creates: "{{ opensrf_src_directory }}/Makefile"
+  become: true
+  become_user: opensrf
+- name: Compile OpenSRF source
+  make:
+    chdir: "{{ opensrf_src_directory }}"
+  become: true
+  become_user: opensrf
+  register: opensrf_compiled
+
+# We need to be root for install which is default for this task file
+# Only run the install when the source has been compiled
+- name: Install OpenSRF
+  make:
+    chdir: "{{ opensrf_src_directory }}"
+    target: install
+  when: opensrf_compiled|succeeded
+  register: opensrf_installed
