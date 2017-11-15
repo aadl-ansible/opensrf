@@ -1,0 +1,6 @@
+---
+- name: Configure system dynamic library path
+  copy:
+    content: "{{ evergreen_install_prefix }}/lib"
+    dest: /etc/ld.so.conf.d/opensrf.conf
+  notify: ldconfig
