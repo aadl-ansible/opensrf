@@ -1,0 +1,49 @@
+---
+# Create the group and user with specific id so same across cluster
+- name: Create opensrf group
+  group:
+    name: opensrf
+    gid: 3000
+    state: present
+- name: Create opensrf user
+  user:
+    name: opensrf
+    group: opensrf
+    shell: /bin/bash
+    uid: 3000
+    state: present
+- name: Setup evergreen path in opensrf bashrc
+  lineinfile:
+    dest: /home/opensrf/.bashrc
+    create: yes
+    owner: opensrf
+    group: opensrf
+    mode: 0644
+    regexp: '^export PATH='
+    line: 'export PATH="{{ evergreen_install_prefix }}/bin:$PATH"'
+
+- name: Make sure make is installed
+  apt:
+    name: make
+    state: present
+
+- name: Download and unpack OpenSRF tarball
+  unarchive:
+    src: "{{ opensrf_download_url }}"
+    dest: /home/opensrf
+    owner: opensrf
+    group: opensrf
+    remote_src: yes
+    creates: "{{ opensrf_src_directory }}/src/extras/Makefile.install"
+
+- name: Update apt repositories
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+# Ansible make module doesn't support choosing a file
+# Could potentially install all requirements via ansible instead
+- name: Install prerequisites from make file
+  command: make -f Makefile.install ubuntu-xenial
+  args:
+    chdir: "{{ opensrf_src_directory }}/src/extras"
+    creates: /etc/apache2/mods-enabled/perl.load

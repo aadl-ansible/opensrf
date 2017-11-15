@@ -1,0 +1,4 @@
+---
+- name: Setup / Install OpenSRF Prerequisites
+  include_tasks: prerequisites.yml
+  become: true
