@@ -13,3 +13,40 @@
     regexp: '^#SMP=.*' 
     line: 'SMP=auto'
   notify: Restart ejabberd
+
+- name: Configure ejabberd for standalone server
+  template: 
+    src: ejabberd.yml.j2 
+    dest: /etc/ejabberd/ejabberd.yml 
+    owner: ejabberd 
+    group: ejabberd 
+    mode: 0600
+  register: ejabber_config
+
+- name: Force ejabberd restart when config has changed
+  service: 
+    state: restarted 
+    name: ejabberd
+  when: ejabber_config|changed
+
+- name: Pause for ejabberd restart
+  command: 'sleep 7'
+  when: ejabber_config|changed
+
+- name: Create ejabberd private users
+  ejabberd_user: 
+    state: present
+    username: "{{ item.key }}"
+    host: "private.localhost"
+    password: "{{ item.value.password }}"
+  with_dict: "{{ opensrf_ejabberd_private_users }}"
+  no_log: true
+
+- name: Create ejabberd public users
+  ejabberd_user: 
+    state: present
+    username: "{{ item.key }}"
+    host: "public.localhost"
+    password: "{{ item.value.password }}"
+  with_dict: "{{ opensrf_ejabberd_private_users }}"
+  no_log: true
