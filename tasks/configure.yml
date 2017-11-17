@@ -48,5 +48,5 @@
     username: "{{ item.key }}"
     host: "public.localhost"
     password: "{{ item.value.password }}"
-  with_dict: "{{ opensrf_ejabberd_private_users }}"
+  with_dict: "{{ opensrf_ejabberd_public_users }}"
   no_log: true
