@@ -32,7 +32,8 @@ log_rate_limit: 100
 
 hosts:
   - "localhost"
-
+  - "private.localhost"
+  - "public.localhost"
 
 listen:
   -
@@ -142,12 +143,12 @@ shaper:
   ##
   ## The "normal" shaper limits traffic speed to 1000 B/s
   ##
-  normal: 1000
+  normal: 500000
 
   ##
   ## The "fast" shaper limits traffic speed to 50000 B/s
   ##
-  fast: 50000
+  fast: 500000
 
 ##
 ## This option specifies the maximum number of elements in the queue
@@ -222,7 +223,7 @@ acl:
 access:
   ## Maximum number of simultaneous sessions allowed for a single user:
   max_user_sessions:
-    all: 10
+    all: 10000
   ## Maximum number of offline messages that users can have:
   max_user_offline_messages:
     admin: 5000
