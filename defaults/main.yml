@@ -5,3 +5,15 @@ opensrf_src_directory: '/home/opensrf/opensrf-{{ opensrf_version }}'
 evergreen_install_prefix: '/openils'
 
 opensrf_configure_options: "--prefix={{ evergreen_install_prefix }} --sysconfdir={{ evergreen_install_prefix }}/conf"
+
+opensrf_ejabberd_private_users:
+  router:
+    password: password
+  opensrf:
+    password: password
+
+opensrf_ejabberd_public_users:
+  router:
+    password: password
+  opensrf:
+    password: password
