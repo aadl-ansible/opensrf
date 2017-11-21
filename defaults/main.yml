@@ -5,9 +5,9 @@ opensrf_download_url: "https://evergreen-ils.org/downloads/opensrf-{{ opensrf_ve
 opensrf_src_directory: '/home/opensrf/opensrf-{{ opensrf_version }}'
 
 no_evergreen: true
-evergreen_install_prefix: '/openils'
+opensrf_install_prefix: '/openils'
 
-opensrf_configure_options: "--prefix={{ evergreen_install_prefix }} --sysconfdir={{ evergreen_install_prefix }}/conf"
+opensrf_configure_options: "--prefix={{ opensrf_install_prefix }} --sysconfdir={{ opensrf_install_prefix }}/conf"
 
 opensrf_ejabberd_private_users:
   router:

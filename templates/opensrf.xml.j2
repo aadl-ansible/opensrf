@@ -22,16 +22,16 @@ vim:et:ts=2:sw=2:
     <dirs>
 
       <!-- opensrf log files go in this directory -->
-      <log>{{ evergreen_install_prefix }}/var/log</log>
+      <log>{{ opensrf_install_prefix }}/var/log</log>
 
       <!-- opensrf unix domaind socket files go here -->
-      <sock>{{ evergreen_install_prefix }}/var/lock</sock>
+      <sock>{{ opensrf_install_prefix }}/var/lock</sock>
 
       <!-- opensrf pids go here -->
-      <pid>{{ evergreen_install_prefix }}/var/run</pid>
+      <pid>{{ opensrf_install_prefix }}/var/run</pid>
 
       <!-- global config directory -->
-      <conf>{{ evergreen_install_prefix }}/conf</conf>
+      <conf>{{ opensrf_install_prefix }}/conf</conf>
     </dirs>
 
     <!-- prefork, simple. prefork is suggested -->
@@ -126,7 +126,7 @@ vim:et:ts=2:sw=2:
         <app_settings>
 
           <!-- sqlite database file -->
-          <dbfile>{{ evergreen_install_prefix }}/var/persist.db</dbfile>
+          <dbfile>{{ opensrf_install_prefix }}/var/persist.db</dbfile>
 
         </app_settings>
       </opensrf.persist>
@@ -249,7 +249,7 @@ vim:et:ts=2:sw=2:
 <!-- Example of an app-specific setting override -->
         <opensrf.persist>
           <app_settings>
-            <dbfile>{{ evergreen_install_prefix }}/var/persist-override.db</dbfile>
+            <dbfile>{{ opensrf_install_prefix }}/var/persist-override.db</dbfile>
           </app_settings>
         </opensrf.persist>
 

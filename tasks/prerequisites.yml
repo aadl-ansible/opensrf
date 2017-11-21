@@ -24,7 +24,7 @@
     group: opensrf
     mode: 0644
     regexp: '^export PATH='
-    line: 'export PATH="{{ evergreen_install_prefix }}/bin:$PATH"'
+    line: 'export PATH="{{ opensrf_install_prefix }}/bin:$PATH"'
 
 - name: Make sure make is installed
   apt:

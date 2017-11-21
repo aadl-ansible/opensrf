@@ -1,7 +1,7 @@
 ---
 - name: Configure system dynamic library path
   copy:
-    content: "{{ evergreen_install_prefix }}/lib"
+    content: "{{ opensrf_install_prefix }}/lib"
     dest: /etc/ld.so.conf.d/opensrf.conf
   notify: ldconfig
 
@@ -54,7 +54,7 @@
 - name: Copy over opensrf configuration files
   template:
     src: "{{ item }}.j2"
-    dest: "{{ evergreen_install_prefix }}/conf/{{ item }}"
+    dest: "{{ opensrf_install_prefix }}/conf/{{ item }}"
     owner: opensrf
     group: opensrf
     mode: 0644
@@ -75,4 +75,4 @@
     recurse: yes
     owner: opensrf
     group: opensrf
-    path: "{{ evergreen_install_prefix }}"
+    path: "{{ opensrf_install_prefix }}"

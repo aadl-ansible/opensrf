@@ -46,7 +46,7 @@ vim:et:ts=2:sw=2:
 
     <!-- log file settings ======================================  -->
     <!-- log to a local file -->
-    <logfile>{{ evergreen_install_prefix }}/var/log/osrfsys.log</logfile>
+    <logfile>{{ opensrf_install_prefix }}/var/log/osrfsys.log</logfile>
 
     <!-- Log to syslog. You can use this same layout for 
         defining the logging of all services in this file -->
@@ -70,7 +70,7 @@ vim:et:ts=2:sw=2:
     <loglength>1536</loglength>
 
     <!-- config file for the services -->
-    <settings_config>{{ evergreen_install_prefix }}/conf/opensrf.xml</settings_config>
+    <settings_config>{{ opensrf_install_prefix }}/conf/opensrf.xml</settings_config>
 
   </opensrf>
 
@@ -92,7 +92,7 @@ vim:et:ts=2:sw=2:
     <username>opensrf</username>
     <passwd>{{ opensrf_ejabberd_private_users.opensrf.password }}</passwd>
     <port>5222</port>
-    <logfile>{{ evergreen_install_prefix }}/var/log/gateway.log</logfile>
+    <logfile>{{ opensrf_install_prefix }}/var/log/gateway.log</logfile>
     <loglevel>3</loglevel>
 
     <!-- cross origin HTTP settings http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
@@ -120,14 +120,14 @@ vim:et:ts=2:sw=2:
             <transport>
                 <server>public.{{ inventory_hostname }}</server>
                 <port>5222</port>
-                <unixpath>{{ evergreen_install_prefix }}/var/sock/unix_sock</unixpath>
+                <unixpath>{{ opensrf_install_prefix }}/var/sock/unix_sock</unixpath>
                 <username>router</username>
                 <password>{{ opensrf_ejabberd_public_users.router.password }}</password>
                 <resource>router</resource>
                 <connect_timeout>10</connect_timeout>
                 <max_reconnect_attempts>5</max_reconnect_attempts>
             </transport>
-            <logfile>{{ evergreen_install_prefix }}/var/log/router.log</logfile>
+            <logfile>{{ opensrf_install_prefix }}/var/log/router.log</logfile>
             <!--
             <logfile>syslog</logfile>
             <syslog>local2</syslog>
@@ -152,7 +152,7 @@ vim:et:ts=2:sw=2:
                 <connect_timeout>10</connect_timeout>
                 <max_reconnect_attempts>5</max_reconnect_attempts>
             </transport>
-            <logfile>{{ evergreen_install_prefix }}/var/log/router.log</logfile>
+            <logfile>{{ opensrf_install_prefix }}/var/log/router.log</logfile>
             <!--
             <logfile>syslog</logfile>
             <syslog>local2</syslog>
