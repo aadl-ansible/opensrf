@@ -1,7 +1,10 @@
+dns_domain: myopensrf.local
+
 opensrf_version: '3.0.0'
 opensrf_download_url: "https://evergreen-ils.org/downloads/opensrf-{{ opensrf_version }}.tar.gz"
 opensrf_src_directory: '/home/opensrf/opensrf-{{ opensrf_version }}'
 
+no_evergreen: true
 evergreen_install_prefix: '/openils'
 
 opensrf_configure_options: "--prefix={{ evergreen_install_prefix }} --sysconfdir={{ evergreen_install_prefix }}/conf"
