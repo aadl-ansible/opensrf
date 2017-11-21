@@ -68,3 +68,11 @@
     src: srfsh.xml.j2
     dest: /home/opensrf/.srfsh.xml
   when: no_evergreen
+
+- name: Make sure permissions are right
+  file: 
+    state: directory
+    recurse: yes
+    owner: opensrf
+    group: opensrf
+    path: "{{ evergreen_install_prefix }}"
