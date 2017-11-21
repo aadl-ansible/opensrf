@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+
+127.0.0.1       localhost
+127.0.1.1       {{ inventory_hostname }}.{{ dns_domain }} {{ inventory_hostname }}
+
+# all machines
+{% for host in groups['all'] %}
+{{ hostvars[host]['ipaddress'] }} {{ hostvars[host].inventory_hostname }}.{{ dns_domain }} {{ hostvars[host].inventory_hostname }}
+{% endfor %}
+# opensrf domains
+{% for host in groups['opensrf'] %}
+{{ hostvars[host]['ipaddress'] }} public.{{ hostvars[host].inventory_hostname }}.{{ dns_domain }} public.{{ hostvars[host].inventory_hostname }}
+{{ hostvars[host]['ipaddress'] }} private.{{ hostvars[host].inventory_hostname }}.{{ dns_domain }} private.{{ hostvars[host].inventory_hostname }}
+{% endfor %}
+
+# No IPv6 per EOLI
