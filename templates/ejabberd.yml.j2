@@ -32,8 +32,8 @@ log_rate_limit: 100
 
 hosts:
   - "localhost"
-  - "private.localhost"
-  - "public.localhost"
+  - "public.{{ inventory_hostname }}"
+  - "private.{{ inventory_hostname }}"
 
 listen:
   -

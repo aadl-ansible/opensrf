@@ -14,7 +14,7 @@
     line: 'SMP=auto'
   notify: Restart ejabberd
 
-- name: Configure ejabberd for standalone server
+- name: Configure ejabberd
   template: 
     src: ejabberd.yml.j2 
     dest: /etc/ejabberd/ejabberd.yml 
@@ -37,7 +37,7 @@
   ejabberd_user: 
     state: present
     username: "{{ item.key }}"
-    host: "private.localhost"
+    host: "private.{{ inventory_hostname }}"
     password: "{{ item.value.password }}"
   with_dict: "{{ opensrf_ejabberd_private_users }}"
   no_log: true
@@ -46,7 +46,25 @@
   ejabberd_user: 
     state: present
     username: "{{ item.key }}"
-    host: "public.localhost"
+    host: "public.{{ inventory_hostname }}"
     password: "{{ item.value.password }}"
   with_dict: "{{ opensrf_ejabberd_public_users }}"
   no_log: true
+
+- name: Copy over opensrf configuration files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ evergreen_install_prefix }}/conf/{{ item }}"
+    owner: opensrf
+    group: opensrf
+    mode: 0644
+  with_items:
+    - opensrf.xml
+    - opensrf_core.xml
+  when: no_evergreen
+
+- name: Configure srfsh for opensrf user
+  template:
+    src: srfsh.xml.j2
+    dest: /home/opensrf/.srfsh.xml
+  when: no_evergreen
