@@ -1,0 +1,23 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: opensrf
+  author: AADL
+  description: Role to install OpenSRF for Evergreen ILS
+  company: Ann Arbor District Library
+
+  license: GPLv3
+
+  min_ansible_version: 2.5
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+
+  galaxy_tags:
+    - evergreen-ils
+    - opensrf
+    - code4lib
