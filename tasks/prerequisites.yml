@@ -44,10 +44,9 @@
   apt:
     update_cache: yes
     cache_valid_time: 86400
-# Ansible make module doesn't support choosing a file
-# Could potentially install all requirements via ansible instead
+
 - name: Install prerequisites from make file
-  command: make -f Makefile.install ubuntu-xenial
-  args:
+  make:
     chdir: "{{ opensrf_src_directory }}/src/extras"
-    creates: /etc/apache2/mods-enabled/perl.load
+    file: Makefile.install
+    target: "{{ hostvars[inventory_hostname].ansible_distribution | lower}}-{{ hostvars[inventory_hostname].ansible_distribution_release }}"
