@@ -2,12 +2,24 @@
 - name: Setup / Install OpenSRF Prerequisites
   include_tasks: prerequisites.yml
   become: true
-  tags: "opensrf-configure"
+  args:
+    apply:
+      tags:
+        - opensrf-prereqs
+  tags: "opensrf-prereqs"
 - name: Setup / Install OpenSRF
   include_tasks: installation.yml
   become: true
+  args:
+    apply:
+      tags:
+        - opensrf-install
   tags: "opensrf-install"
 - name: Configure OpenSRF
   include_tasks: configure.yml
   become: true
+  args:
+    apply:
+      tags:
+        - opensrf-configure
   tags: "opensrf-configure"
