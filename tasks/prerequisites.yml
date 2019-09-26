@@ -26,11 +26,6 @@
     regexp: '^export PATH='
     line: 'export PATH="{{ opensrf_install_prefix }}/bin:$PATH"'
 
-- name: Make sure make is installed
-  apt:
-    name: make
-    state: present
-
 - name: Download and unpack OpenSRF tarball
   unarchive:
     src: "{{ opensrf_download_url }}"
@@ -45,8 +40,6 @@
     update_cache: yes
     cache_valid_time: 86400
 
-- name: Install prerequisites from make file
-  make:
-    chdir: "{{ opensrf_src_directory }}/src/extras"
-    file: Makefile.install
-    target: "{{ hostvars[inventory_hostname].ansible_distribution | lower}}-{{ hostvars[inventory_hostname].ansible_distribution_release }}"
+- name: Install prerequisites based on Makefile
+  apt:
+    name: "{{ opensrf_prerequisites }}"
