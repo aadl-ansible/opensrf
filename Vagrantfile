@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
   config.vm.define "opensrfapp1" do |opensrfapp1|
     opensrfapp1.vm.network "private_network", ip: "192.168.10.10"
     opensrfapp1.vm.network "forwarded_port", guest: 22, host: 3000, id: 'ssh'
