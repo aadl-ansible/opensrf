@@ -6,26 +6,26 @@
   notify: ldconfig
 
 - name: Enable SMP in ejabberd
-  lineinfile: 
-    state: present 
-    backrefs: yes 
-    dest: /etc/default/ejabberd 
-    regexp: '^#SMP=.*' 
+  lineinfile:
+    state: present
+    backrefs: yes
+    dest: /etc/default/ejabberd
+    regexp: '^#SMP=.*'
     line: 'SMP=auto'
   notify: Restart ejabberd
 
 - name: Configure ejabberd
-  template: 
-    src: ejabberd.yml.j2 
-    dest: /etc/ejabberd/ejabberd.yml 
-    owner: ejabberd 
-    group: ejabberd 
+  template:
+    src: ejabberd.yml.j2
+    dest: /etc/ejabberd/ejabberd.yml
+    owner: ejabberd
+    group: ejabberd
     mode: 0600
   register: ejabber_config
 
 - name: Force ejabberd restart when config has changed
-  service: 
-    state: restarted 
+  service:
+    state: restarted
     name: ejabberd
   when: ejabber_config|changed
 
@@ -34,7 +34,7 @@
   when: ejabber_config|changed
 
 - name: Create ejabberd private users
-  ejabberd_user: 
+  ejabberd_user:
     state: present
     username: "{{ item.key }}"
     host: "private.{{ inventory_hostname }}"
@@ -43,7 +43,7 @@
   no_log: true
 
 - name: Create ejabberd public users
-  ejabberd_user: 
+  ejabberd_user:
     state: present
     username: "{{ item.key }}"
     host: "public.{{ inventory_hostname }}"
@@ -70,7 +70,7 @@
   when: no_evergreen
 
 - name: Make sure permissions are right
-  file: 
+  file:
     state: directory
     recurse: yes
     owner: opensrf
