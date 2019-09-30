@@ -7,3 +7,10 @@
   service:
     state: restarted
     name: ejabberd
+  notify: Wait for ejabberd
+
+- name: Wait for ejabberd
+  wait_for:
+    timeout: 7
+  delegate_to: localhost
+  become: false

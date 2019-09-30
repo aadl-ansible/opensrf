@@ -22,16 +22,10 @@
     group: ejabberd
     mode: 0600
   register: ejabber_config
+  notify: Restart ejabberd
 
 - name: Force ejabberd restart when config has changed
-  service:
-    state: restarted
-    name: ejabberd
-  when: ejabber_config|changed
-
-- name: Pause for ejabberd restart
-  command: 'sleep 7'
-  when: ejabber_config|changed
+  meta: flush_handlers
 
 - name: Create ejabberd private users
   ejabberd_user:
