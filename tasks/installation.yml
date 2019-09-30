@@ -7,12 +7,14 @@
     creates: "{{ opensrf_src_directory }}/Makefile"
   become: true
   become_user: opensrf
+  register: opensrf_src_configured
 - name: Compile OpenSRF source
   make:
     chdir: "{{ opensrf_src_directory }}"
   become: true
   become_user: opensrf
   register: opensrf_compiled
+  when: opensrf_src_configured is changed
 
 # We need to be root for install which is default for this task file
 # Only run the install when the source has been compiled
@@ -20,5 +22,5 @@
   make:
     chdir: "{{ opensrf_src_directory }}"
     target: install
-  when: opensrf_compiled|succeeded
+  when: opensrf_compiled is changed and opensrf_compiled|succeeded
   register: opensrf_installed
