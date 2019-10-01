@@ -288,7 +288,7 @@ vim:et:ts=2:sw=2:
 <!-- Example of an app-specific setting override -->
         <opensrf.persist>
           <app_settings>
-            <dbfile>LOCALSTATEDIR/persist-override.db</dbfile>
+            <dbfile>{{ opensrf_install_prefix }}/var/persist-override.db</dbfile>
           </app_settings>
         </opensrf.persist>
 
