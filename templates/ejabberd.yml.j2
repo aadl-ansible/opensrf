@@ -82,8 +82,8 @@ log_rate_limit: 100
 ##
 hosts:
   - "localhost"
-  - private.{{ inventory_hostname }}
-  - public.{{ inventory_hostname }}
+  - "private.{{ inventory_hostname }}"
+  - "public.{{ inventory_hostname }}"
 
 ##
 ## route_subdomains: Delegate subdomains to other XMPP servers.
