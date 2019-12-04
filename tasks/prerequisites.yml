@@ -1,8 +1,8 @@
 ---
-- name: Update hosts file
-  template:
-    src: hosts.j2
-    dest: /etc/hosts
+# - name: Update hosts file
+#   template:
+#     src: hosts.j2
+#     dest: /etc/hosts
 # Create the group and user with specific id so same across cluster
 - name: Create opensrf group
   group:
