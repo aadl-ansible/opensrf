@@ -22,5 +22,5 @@
   make:
     chdir: "{{ opensrf_src_directory }}"
     target: install
-  when: opensrf_compiled is changed and opensrf_compiled|succeeded
+  when: opensrf_compiled is changed and opensrf_compiled is succeeded
   register: opensrf_installed
