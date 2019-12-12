@@ -142,7 +142,7 @@ listen:
     module: ejabberd_c2s
     starttls_required: false
     protocol_options: 'TLS_OPTIONS'
-    max_stanza_size: 65536
+    max_stanza_size: {{ opensrf_ejabberd_max_stanza_size }}
     shaper: c2s_shaper
     access: c2s
   -
