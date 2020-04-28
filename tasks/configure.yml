@@ -49,8 +49,8 @@
   template:
     src: "{{ item }}.j2"
     dest: "{{ opensrf_install_prefix }}/conf/{{ item }}"
-    owner: opensrf
-    group: opensrf
+    owner: "{{ opensrf_system_user }}"
+    group: "{{ opensrf_system_user }}"
     mode: 0644
   with_items:
     - opensrf.xml
@@ -66,6 +66,6 @@
   file:
     state: directory
     recurse: yes
-    owner: opensrf
-    group: opensrf
+    owner: "{{ opensrf_system_user }}"
+    group: "{{ opensrf_system_user }}"
     path: "{{ opensrf_install_prefix }}"

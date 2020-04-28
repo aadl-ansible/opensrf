@@ -6,22 +6,22 @@
 # Create the group and user with specific id so same across cluster
 - name: Create opensrf group
   group:
-    name: opensrf
+    name: "{{ opensrf_system_user }}"
     gid: 3000
     state: present
 - name: Create opensrf user
   user:
-    name: opensrf
-    group: opensrf
+    name: "{{ opensrf_system_user }}"
+    group: "{{ opensrf_system_user }}"
     shell: /bin/bash
     uid: 3000
     state: present
 - name: Setup evergreen path in opensrf bashrc
   lineinfile:
-    dest: /home/opensrf/.bashrc
+    dest: /home/{{ opensrf_system_user }}/.bashrc
     create: yes
-    owner: opensrf
-    group: opensrf
+    owner: "{{ opensrf_system_user }}"
+    group: "{{ opensrf_system_user }}"
     mode: 0644
     regexp: '^export PATH='
     line: 'export PATH="{{ opensrf_install_prefix }}/bin:$PATH"'
@@ -29,9 +29,9 @@
 - name: Download and unpack OpenSRF tarball
   unarchive:
     src: "{{ opensrf_download_url }}"
-    dest: /home/opensrf
-    owner: opensrf
-    group: opensrf
+    dest: "/home/{{ opensrf_system_user }}"
+    owner: "{{ opensrf_system_user }}"
+    group: "{{ opensrf_system_user }}"
     remote_src: yes
     creates: "{{ opensrf_src_directory }}/src/extras/Makefile.install"
 

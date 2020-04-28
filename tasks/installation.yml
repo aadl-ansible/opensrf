@@ -6,13 +6,13 @@
     chdir: "{{ opensrf_src_directory }}"
     creates: "{{ opensrf_src_directory }}/Makefile"
   become: true
-  become_user: opensrf
+  become_user: "{{ opensrf_system_user }}"
   register: opensrf_src_configured
 - name: Compile OpenSRF source
   make:
     chdir: "{{ opensrf_src_directory }}"
   become: true
-  become_user: opensrf
+  become_user: "{{ opensrf_system_user }}"
   register: opensrf_compiled
   when: opensrf_src_configured is changed
 
