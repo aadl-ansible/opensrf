@@ -1,12 +1,14 @@
 dns_domain: myopensrf.local
 
 opensrf_version: '3.2.1'
-opensrf_download_url: "https://evergreen-ils.org/downloads/opensrf-{{ opensrf_version }}.tar.gz"
-opensrf_src_directory: '/home/opensrf/opensrf-{{ opensrf_version }}'
-
 opensrf_no_evergreen: true
+
 opensrf_install_prefix: '/openils'
 opensrf_system_user: 'opensrf'
+
+opensrf_download_url: "https://evergreen-ils.org/downloads/opensrf-{{ opensrf_version }}.tar.gz"
+opensrf_src_directory: "/home/{{ opensrf_system_user }}/opensrf-{{ opensrf_version }}"
+
 
 opensrf_configure_options: "--enable-python --prefix={{ opensrf_install_prefix }} --sysconfdir={{ opensrf_install_prefix }}/conf"
 
