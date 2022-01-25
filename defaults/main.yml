@@ -1,6 +1,6 @@
 dns_domain: myopensrf.local
 
-opensrf_version: '3.2.1'
+opensrf_version: '3.2.2'
 opensrf_no_evergreen: true
 
 opensrf_install_prefix: '/openils'
